@@ -12,6 +12,7 @@ import academico.repositorios.FuncionarioRepositorio;
 
 @ManagedBean(name="funcionarioMB")
 @SessionScoped
+//cont
 public class FuncionarioControlador implements Serializable{
 	
 	Funcionario funcionario = new Funcionario();
