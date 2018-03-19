@@ -15,18 +15,20 @@
 	<h:inputText value ="#{funcionarioMB.funcionario.cpf}"></h:inputText>
 <br />
 
-<h:selectOneMenu value="#{funcionarioMB.id}">
-<f:selectItems value="#{escolaMB.listaEscola}" 
-			  var="escola" 
-			  itemValue="#{escola.codigo}" 
-			  itemLabel="#{escola.nome}" >
 
-			  
-</f:selectItems>
-</h:selectOneMenu>
+<h:outputLabel value="Telefone do funcionario:"></h:outputLabel>
+	<h:inputText value ="#{funcionarioMB.funcionario.telefone}"></h:inputText>
+<br />
+
+
+<h:outputLabel value="Funcao do funcionario:"></h:outputLabel>
+	<h:inputText value ="#{funcionarioMB.funcionario.funcao}"></h:inputText>
+<br />
+
+
 
 <br />
-#<h:commandButton action="#{funcionarioMB.adicionarFuncionario()}" value="Confirmar">
+<h:commandButton action="#{funcionarioMB.adicionarFuncionario()}" value="Confirmar">
 				 
 </h:commandButton>
 </h:form>

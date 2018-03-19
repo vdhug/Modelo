@@ -7,44 +7,81 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import academico.entidades.Funcionario;
-import academico.repositorios.EscolaRepositorio;
 import academico.repositorios.FuncionarioRepositorio;
-
 
 
 @ManagedBean(name="funcionarioMB")
 @SessionScoped
 public class FuncionarioControlador implements Serializable{
-	FuncionarioRepositorio fr = new FuncionarioRepositorio();
-	EscolaRepositorio er = new EscolaRepositorio();
+	
 	Funcionario funcionario = new Funcionario();
-	private int id;
-	
-	List<Funcionario> listFuncionarios = null;
-	
+	FuncionarioRepositorio er = new FuncionarioRepositorio();
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	
 	public String adicionarFuncionario() {
-        funcionario.setEscola(er.recuperar(id));
-        fr.adicionar(funcionario);
-        return "funcionarioLista";
-    }
-    
-    public List<Funcionario> listarFuncionarios() {
-        if(listFuncionarios ==null)
-         listFuncionarios = fr.listar();
-        return listFuncionarios;
-    }
-    
+		er.adicionar(funcionario);
+		listaFuncionario = null;
+		return "funcionarioLista";
+	}
+	
+	List<Funcionario> listaFuncionario = null;
+	List <Funcionario> listaFuncionarioFiltro = null;
+	
+	public FuncionarioRepositorio getEr() {
+		return er;
+	}
+	public void setEr(FuncionarioRepositorio er) {
+		this.er = er;
+	}
+	public List<Funcionario> getListaFuncionarioFiltro() {
+		return listaFuncionarioFiltro;
+	}
+	public void setListaFuncionarioFiltro(List<Funcionario> listaFuncionarioFiltro) {
+		this.listaFuncionarioFiltro = listaFuncionarioFiltro;
+	}
+	public void setListaFuncionario(List<Funcionario> listaFuncionario) {
+		this.listaFuncionario = listaFuncionario;
+	}
+	public List<Funcionario> getListaFuncionario() {
+		if(listaFuncionario==null)
+			listaFuncionario = er.listar();
+		return listaFuncionario;
+	}
+	
+	public String novaFuncionario() {	
+		funcionario = new Funcionario();
+		return "funcionarioFormulario";
+	}
+
+	public String editarFuncionario (Funcionario e) {
+		funcionario = e;
+		er.atualizar(funcionario);
+		listaFuncionario = null;
+		return "funcionarioFormulario";
+		
+	}
+	
+	public String excluirFuncionario(Funcionario e) {
+		this.funcionario = e;
+		return "funcionarioConfirmarExclusao";
+		
+	}
+
+	public String confirmarExclusaoFuncionario() {
+		er.remover(funcionario);
+		listaFuncionario = null;
+		return "funcionarioListar";
+	}
+	
 }
+
+
+
+
+
+
