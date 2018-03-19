@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:body>
+ 
+    	<ui:composition template="template/layout.xhtml">
+
+		<ui:define name="content">
+		    	<h:form>
+				<h:dataTable value="#{agendaMB.listaAgenda}" var="agenda">
+				<h:column>
+					<h:outputLabel value="#{agenda.inicio}"></h:outputLabel>
+				</h:column>
+				<h:column>
+					<h:outputLabel value="#{agenda.termino}"></h:outputLabel>
+				</h:column>
+				<h:column>
+					<h:outputLabel value="#{agenda.docente.nome}"></h:outputLabel>
+				</h:column>
+				<h:column>
+					<h:outputLabel value="#{agenda.laboratorio.nome}"></h:outputLabel>
+				</h:column>
+				<h:column>
+				<h:commandButton action="#{agendaMB.editarAgenda(agenda)}"
+					value="Editar"></h:commandButton>
+				</h:column>
+				<h:column>
+				<h:commandButton action="#{agendaMB.excluirAgenda(agenda)}"
+					value="Excluir"></h:commandButton>
+				</h:column>
+				</h:dataTable>
+			</h:form>
+			
+			<a href="agendaFormulario.xhtml">Adicionar Novo</a>
+			
+		</ui:define>
+
+    	</ui:composition>
+ 
+    </h:body>
+ 
+</html>

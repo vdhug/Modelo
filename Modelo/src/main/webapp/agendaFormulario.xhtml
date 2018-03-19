@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:composition template="template/layout.xhtml">
+
+		<ui:define name="content">
+			<h:form>
+				<h:outputLabel value="Inicio agendamento:  ">
+				</h:outputLabel>
+				<p:calendar id="inicio" value="#{agendaMB.agenda.inicio}">
+					<f:convertDateTime type="date" pattern="dd/mm/yyyy" />
+					<p:clientValidator event="blur" />
+				</p:calendar>
+				<p:watermark value="DD/MM/YYYY" for="inicio" />
+				<br />
+
+				<h:outputLabel value="Termino agendamento:  ">
+				</h:outputLabel>
+				<p:calendar id="termino" value="#{agendaMB.agenda.termino}">
+					<f:convertDateTime type="date" pattern="dd/mm/yyyy" />
+					<p:clientValidator event="blur" />
+				</p:calendar>
+				<p:watermark value="DD/MM/YYYY" for="termino" />
+				<br />
+				
+				<h:selectOneMenu label="Docente" value="#{agendaMB.docenteId}">
+					<f:selectItems value="#{docenteMB.listaDocente}" var="docente" itemValue="#{docente.id}" itemLabel="#{docente.nome}"/>
+				</h:selectOneMenu>
+				<br />
+				
+				<h:selectOneMenu label="Laboratorio" value="#{agendaMB.laboratorioId}">
+					<f:selectItems value="#{laboratorioMB.listaLaboratorio}" var="laboratorio" itemValue="#{laboratorio.id}" itemLabel="#{laboratorio.nome}"/>
+				</h:selectOneMenu>
+				<br />
+
+				<h:commandButton action="#{agendaMB.adicionarAgenda}"
+					value="Adicionar"></h:commandButton>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

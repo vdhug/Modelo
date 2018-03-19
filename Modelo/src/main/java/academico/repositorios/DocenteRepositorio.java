@@ -1,4 +1,5 @@
 package academico.repositorios;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -6,44 +7,45 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import academico.entidades.Escola;
+import academico.entidades.Docente;
 
 
-public class EscolaRepositorio {
+public class DocenteRepositorio {
 
 	private EntityManagerFactory emf;
 	private EntityManager em;
 	
-	public EscolaRepositorio() {
-		emf = Persistence.createEntityManagerFactory("AcademicoJPA");
+	public DocenteRepositorio (){
+		emf = Persistence.createEntityManagerFactory("AgendaLabJPA");
 		em = emf.createEntityManager();
 	}
 
-	public void adicionar(Escola escola){
+	public void adicionar(Docente docente){
 		em.getTransaction().begin();
-		em.persist(escola);
+		em.persist(docente);
 		em.getTransaction().commit();
 	}
-	public Escola recuperar(int id){
-		return em.find(Escola.class, id);
+	public Docente recuperar(int id){
+		return em.find(Docente.class, id);
 	}
-	public void atualizar(Escola escola){
+	public void atualizar(Docente docente){
 		em.getTransaction().begin();
-		em.merge(escola);
+		em.merge(docente);
 		em.getTransaction().commit();
 	}
-	public void remover(Escola escola){
+	public void remover(Docente docente){
 		em.getTransaction().begin();
-		em.remove(escola);
+		em.remove(docente);
 		em.getTransaction().commit();
-	}
-	public List<Escola> listar() {
-		Query qr = em.createQuery("from Escola e");
-		return qr.getResultList();
-	}
-
+	}	
 	public void encerrar(){
 		em.close();
 		emf.close();
 	}
+	
+	public List<Docente> listar() {
+		Query qr = em.createQuery("from Docente c");
+		return qr.getResultList();
+	}
+	
 }
