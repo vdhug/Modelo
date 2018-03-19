@@ -18,7 +18,7 @@ public class Escola implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	
+	//nova mudanca
 	private int codigo;
 	
 	private String nome;
