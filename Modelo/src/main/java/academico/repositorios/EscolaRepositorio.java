@@ -1,6 +1,4 @@
 package academico.repositorios;
-
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,38 +6,39 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import academico.entidades.Curso;
+import academico.entidades.Escola;
 
-public class CursoRepositorio{
+
+public class EscolaRepositorio {
 
 	private EntityManagerFactory emf;
 	private EntityManager em;
 	
-	public CursoRepositorio (){
+	public EscolaRepositorio() {
 		emf = Persistence.createEntityManagerFactory("AcademicoJPA");
 		em = emf.createEntityManager();
 	}
 
-	public void adicionar(Curso curso){
+	public void adicionar(Escola escola){
 		em.getTransaction().begin();
-		em.persist(curso);
+		em.persist(escola);
 		em.getTransaction().commit();
 	}
-	public Curso recuperar(int id){
-		return em.find(Curso.class, id);
+	public Escola recuperar(int id){
+		return em.find(Escola.class, id);
 	}
-	public void atualizar(Curso curso){
+	public void atualizar(Escola escola){
 		em.getTransaction().begin();
-		em.merge(curso);
+		em.merge(escola);
 		em.getTransaction().commit();
 	}
-	public void remover(Curso curso){
+	public void remover(Escola escola){
 		em.getTransaction().begin();
-		em.remove(curso);
+		em.remove(escola);
 		em.getTransaction().commit();
 	}
-	public List<Curso> listar() {
-		Query qr = em.createQuery("from Curso c");
+	public List<Escola> listar() {
+		Query qr = em.createQuery("from Escola e");
 		return qr.getResultList();
 	}
 
@@ -47,5 +46,4 @@ public class CursoRepositorio{
 		em.close();
 		emf.close();
 	}
-	
 }
